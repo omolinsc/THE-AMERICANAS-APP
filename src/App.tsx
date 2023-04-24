@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { ReactNode } from 'react';
+import './App.scss';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Home from './pages/Home';
+import Games from './pages/Games';
+import { routes } from './routes/routes';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" replace={true} />} />
+          <Route path="*" element={<Navigate to="/home" replace={true} />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/games" element={<Games />} />
+          {/* {routes && routes.map(({path, name, component}:any, index): ReactNode => {
+            console.log("HOLA")
+            return (
+                <Route path={path} element={component} key={index+path+name} />
+              )
+          })} */}
+        </Routes>
+      </Router>
     </div>
   );
 }
